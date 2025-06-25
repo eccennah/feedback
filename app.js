@@ -15,7 +15,7 @@ app.use(express.json());
 const Feedback = require('./models/feedback');
 
 app.use('/api/feedback', feedbackRoutes);
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.get('/', async (req, res) => {
   const feedbacks = await Feedback.find().sort({ createdAt: -1 });
@@ -43,3 +43,4 @@ mongoose.connect(process.env.MONGO_URI)
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
   .catch((err) => console.error('MongoDB connection error:', err));
+app.use(express.static(path.join(__dirname, 'public')));
