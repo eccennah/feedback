@@ -1,0 +1,22 @@
+<%- include("layout") %>
+
+<h1>Feedback Box</h1>
+
+<form action="/submit" method="POST">
+  <input type="text" name="name" placeholder="Your name (optional)" style="width: 100%; margin-bottom: 10px;"><br>
+  <textarea name="message" placeholder="Enter your feedback" required style="width: 100%; height: 100px;"></textarea><br>
+  <button type="submit">Submit Feedback</button>
+</form>
+
+<div class="feedbacks">
+  <% feedbacks.forEach(fb => { %>
+    <div class="feedback">
+      <strong><%= fb.name %></strong>  
+      <div><%= fb.message %></div>
+      <div class="small"><%= fb.createdAt.toDateString() %></div>
+      <form action="/delete/<%= fb._id %>" method="POST" onsubmit="return confirm('Are you sure?');">
+        <button type="submit">Delete</button>
+      </form>
+    </div>
+  <% }) %>
+</div>
